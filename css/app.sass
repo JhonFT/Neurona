@@ -1,0 +1,37 @@
+$primay-color : #673AB7;
+$primay-color-dracked : #512DA8;
+$secundary-color : #FF5252;
+$primay-text-icon: white;
+$primay-text-color: #212121;
+
+header
+	background-color: $primay-color
+	padding: 1em
+
+	h1
+		color: $primay-text-icon
+
+#body-container
+	padding: 3em 0
+	.caja
+		border: 1px solid $primay-color
+		height: 40px
+		margin: 1px
+		cursor: pointer
+
+		&.active
+			background-color: $primay-color
+			border: 1px solid $primay-color-dracked
+	.list-group
+		a
+			&.title
+				background-color: $primay-color-dracked
+				h5
+					color: $primay-text-icon
+			span.tag
+				background-color: $secundary-color
+			&.active
+				background-color: $secundary-color
+				border-color: #ca2a2a
+	#peso-container
+    	margin: 3em auto

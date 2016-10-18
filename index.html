@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8" >
+	<title>Incca -- Neurona --</title>
+	<link rel="stylesheet" href="css/bootstrap-flex.min.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body  ng-controller="getLetter">
+	<header>
+		<h1>Neurona</h1>
+	</header>
+	<section id="body-container" >
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12  col-sm-3">
+					<div class="container">
+						<div class="row">
+							<div class="list-group col-xs-12">
+								<a href="#" class="list-group-item list-group-item-action title text-xs-center">
+									<h5 class="list-group-item-heading">
+										Letras
+									</h5>
+								</a>
+								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(1)"
+								 ng-class="selectLetter === 1? 'active':''">
+									A <span class="tag tag-pill tag-default pull-xs-right">3</span>
+								</a>
+								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(2)"
+								 ng-class="selectLetter === 2? 'active':''">
+									E <span class="tag tag-pill tag-default pull-xs-right">2</span>
+								</a>
+								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(3)"
+								 ng-class="selectLetter === 3? 'active':''">
+									I <span class="tag tag-pill tag-default pull-xs-right">1</span>
+								</a>
+								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(4)"
+								 ng-class="selectLetter === 4? 'active':''">
+									O <span class="tag tag-pill tag-default pull-xs-right">1</span>
+								</a>
+								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(5)"
+								 ng-class="selectLetter === 5? 'active':''">
+									U <span class="tag tag-pill tag-default pull-xs-right">2</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-9 col-lg-6 ">
+					<div class="row flex-items-xs-center" ng-repeat="letter in letter">
+						<div class="col-xs-1 caja" ng-class="letter.e1 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e1')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e2 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e2')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e3 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e3')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e4 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e4')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e5 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e5')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e6 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e6')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e7 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e7')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e8 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e8')"></div>
+						<div class="col-xs-1 caja" ng-class="letter.e9 > 0 ? 'active' : '' " ng-click="changevalue(letter, 'e9')"></div>
+						<div class="col-xs-1  text-xs-center offset-xs-1"> {{letter.salida}} </div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<button class="button" ng-click="aprender()">
+								Aprender
+							</button>
+							<button class="button" ng-click="save()">
+								Guardar
+							</button>
+							<button class="button" ng-click="comparar()">
+								Comprar
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row expand" id="peso-container">
+					<div class="col-xs-12  flex-items-xs-center">
+						<div class="row flex-items-xs-center text-xs-center"  ng-repeat="weight in weight">
+							<div class="col-xs-1 caja">{{weight.p1 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p2 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p3 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p4 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p5 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p6 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p7 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p8 | number:2 }}</div>
+							<div class="col-xs-1 caja">{{weight.p9 | number:2 }}</div>
+							<div class="col-xs-1  text-xs-center offset-xs-1"> {{weight.umbral  | number:2 }} </div>
+						</div>
+				</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
