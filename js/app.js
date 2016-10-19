@@ -18,38 +18,36 @@ app.controller('getLetter', ['$scope','$http','$timeout', ($scope, $http, $timeo
 		{id_posicion:8,e1:0,e2:0,e3:0,e4:0,e5:0,e6:0,e7:0,e8:0,e9:0},
 		{id_posicion:9,e1:0,e2:0,e3:0,e4:0,e5:0,e6:0,e7:0,e8:0,e9:0},
 	]
+	
+
+	$http
+		.get('http://localhost:1111/letter/gorup')
+		.success((data) => { $scope.menu = data })
+		.error((data, status) => {})
+		.finally(() => {})
 
 	$http
 		.get('http://localhost:1111/weight')
-		.success((data) => {
-			$scope.weight = data
-		})
-		.error((data, status) => {
-
-		})
-		.finally(() => {
-
-		})
+		.success((data) => { $scope.weight = data })
+		.error((data, status) => {})
+		.finally(() => {})
 	
 	$http
 		.get('http://localhost:1111/letters')
 		.success(function(data) {
 			$scope.letter = []
-			$scope.letters = data
+			localStorage.letters = JSON.stringify(data)
         	data[0].val.map((v) => {if(v.objeto === 1) {$scope.letter.push(v)} })
-        	
-	    })
-	    .error(function(data, status) {
-	        // Handle HTTP error
-		})
-	    .finally(function() {
-			$timeout(()=>{$scope.resizeCajas()},0)
-		})
+        })
+	    .error(function(data, status) {})
+	    .finally(function() {$timeout(()=>{$scope.resizeCajas()},0)})
 
 
 	 $scope.changeLetter =  (id) => {
-	 	$scope.letter = [];	
-        $scope.letters[id-1].val.map((v) => {if(v.objeto === 1) {$scope.letter.push(v)} })
+	 	$scope.letter = []
+	 	$scope.letters = JSON.parse(localStorage.letters)	
+        $scope.letters[id-1].val.map((v) => { if(v.objeto === 1) $scope.letter.push(v)  })
+        $timeout(()=>{ $scope.resizeCajas() },0)
 	 }
 
 	 $scope.table = (x,y) => {
@@ -84,12 +82,15 @@ app.controller('getLetter', ['$scope','$http','$timeout', ($scope, $http, $timeo
 	$scope.changeWeight = () =>{
 		$http.
 			post('http://localhost:1111/weight/change',$scope.weight).
-			success((data)=>{})
+			success((data)=>{
+				console.log('change pesos')
+			})
 	}
 
 	$scope.comparar =  () =>{
-		var i = 0;
-		var salida = [];
+		var i = 0
+		var salida = []
+		$scope.letters = JSON.parse(localStorage.letters)
 		while(i < $scope.letter.length){
 			y = ($scope.letter[i].e1 * $scope.weight[i].p1) +
 				($scope.letter[i].e2 * $scope.weight[i].p2) +
@@ -131,12 +132,14 @@ app.controller('getLetter', ['$scope','$http','$timeout', ($scope, $http, $timeo
 
 	$scope.aprender = () =>{
 		n = 0
+		$scope.letters = JSON.parse(localStorage.letters)
 		while(n < $scope.letters.length){
 			var cambio = false;
 			$scope.letra = $scope.letters[n].val
-			var i = 1,
+			var i = 0,
 			y = 0,
 			count = 0 
+			console.log('Letra: '+$scope.letra[0].id_letra+' Objeto:'+ $scope.letra[0].objeto)
 			while(i < $scope.letra.length && count < 100){
 				y = ($scope.letra[i].e1 * $scope.weight[i].p1) +
 					($scope.letra[i].e2 * $scope.weight[i].p2) +
@@ -160,8 +163,8 @@ app.controller('getLetter', ['$scope','$http','$timeout', ($scope, $http, $timeo
 							+$scope.letra[i].e6+","
 							+$scope.letra[i].e7+","
 							+$scope.letra[i].e8+","
-							+$scope.letra[i].e9+"]) Valor esperado[" +
-							+$scope.letra[i].salida+"] Salida[" + y + "]")
+							+$scope.letra[i].e9+"]) \n Valor esperado[" +
+							+$scope.letra[i].salida+"] \n Salida[" + y + "]")
 
 
 				if(y === parseInt($scope.letra[i].salida)){
@@ -189,7 +192,6 @@ app.controller('getLetter', ['$scope','$http','$timeout', ($scope, $http, $timeo
 	                console.log("w7: " + $scope.weight[i].p7);
 	                console.log("w8: " + $scope.weight[i].p8);
 	                console.log("w9: " + $scope.weight[i].p9);
-
 	                console.log("θ: " + $scope.weight[i].umbral + "\n");
 	                count ++;
 	                i = 0;

@@ -22,25 +22,8 @@
 										Letras
 									</h5>
 								</a>
-								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(1)"
-								 ng-class="selectLetter === 1? 'active':''">
-									A <span class="tag tag-pill tag-default pull-xs-right">3</span>
-								</a>
-								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(2)"
-								 ng-class="selectLetter === 2? 'active':''">
-									E <span class="tag tag-pill tag-default pull-xs-right">2</span>
-								</a>
-								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(3)"
-								 ng-class="selectLetter === 3? 'active':''">
-									I <span class="tag tag-pill tag-default pull-xs-right">1</span>
-								</a>
-								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(4)"
-								 ng-class="selectLetter === 4? 'active':''">
-									O <span class="tag tag-pill tag-default pull-xs-right">1</span>
-								</a>
-								<a href="#" class="list-group-item list-group-item-action" ng-click="changeLetter(5)"
-								 ng-class="selectLetter === 5? 'active':''">
-									U <span class="tag tag-pill tag-default pull-xs-right">2</span>
+								<a href="#" class="list-group-item list-group-item-action" ng-repeat=" menu in menu" ng-click="changeLetter(menu.id_letra)" ng-class="selectLetter === menu.id_letra ? 'active':''">
+									{{menu.letra}} <span class="tag tag-pill tag-default pull-xs-right">{{menu.grupo}}</span>
 								</a>
 							</div>
 						</div>

@@ -86,6 +86,19 @@ app.post("/weight/change",function(req,res,next){
 	res.end(query.sql); 
 });
 
+
+app.get('/letter/gorup',function(req,res,nex){
+	var query ="select i.id_letra,l.letra,count(i.objeto) as grupo FROM " +
+				"(select id_letra,objeto from entradas e where 1=1 group by e.id_letra,e.objeto) as i " +
+				"INNER JOIN letras l on i.id_letra = l.id_letra "+
+				"where 1=1 group by i.id_letra"
+	connection.query(query,function(err,rows,fields){
+		if(!err)
+			res.json(rows)
+		else
+			console.log('Error con las letras agrupadas')
+	})
+})
 app.get('/weight',function(req,res,next){
 	connection.query('SELECT * from peso', function(err, rows, fields) {
   	if (!err)
@@ -120,7 +133,7 @@ app.post('/letter/new',function(req,res,next){
 app.get('/letters',function(req,res,next){
 	var  letters = [];	
 	var  letter = [];	
-  	var query = connection.query('SELECT * from entradas where objeto = 1',function(err, rows, fields) {
+  	var query = connection.query('SELECT * from entradas',function(err, rows, fields) {
 	  		if (!err){
 	  			
 	  			for(x=1;x<6;x++){
